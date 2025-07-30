@@ -13,7 +13,7 @@ async def get_current_user(token: AuthDep, session: SessionDep):
         payload = decode_token(token)
         idx = payload["sub"]
         user_crud = CRUD(table=Users, session=session)
-        user = await user_crud.read_by_filter([int(idx) == Users.id])
+        user = await user_crud.read_by_filter([Users.id == int(idx)])
         if user:
             return user[0]
         else:
